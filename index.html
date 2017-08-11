@@ -21,6 +21,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+    let user = prompt("Please enter your name");
+    if (user == null ||user == "") {
+    txt = "User cancelled the prompt.";
+    } else {
+    txt = "Hello " + user + "! How are you today?";
+    }
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -28,7 +34,9 @@
           $('#m').val('');
           return false;
         });
+        // Attempting to specify user before the message.
         socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(user + ':').wrapInner("<strong />"));
           $('#messages').append($('<li>').text(msg));
         });
       });
