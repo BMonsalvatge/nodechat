@@ -35,9 +35,10 @@
           return false;
         });
         // Attempting to specify user before the message.
+        // Currently whenever using different browsers, it displays every message coming from the username entered in that broswer.
         socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(user + ':').wrapInner("<strong />"));
-          $('#messages').append($('<li>').text(msg));
+          $('#messages').prepend($('<li>').text(user + ':').wrapInner("<strong />"));
+          $('#messages').prepend($('<li>').html(msg));
         });
       });
     </script>
