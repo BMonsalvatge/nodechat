@@ -11,9 +11,11 @@
       #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
+	  body { margin-bottom: 50px; }
     </style>
   </head>
   <body>
+	<h1>Bryan is a god</h1>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -21,12 +23,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-    let user = prompt("Please enter your name");
-    if (user == null ||user == "") {
-    txt = "User cancelled the prompt.";
-    } else {
-    txt = "Hello " + user + "! How are you today?";
-    }
       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -34,10 +30,7 @@
           $('#m').val('');
           return false;
         });
-        // Attempting to specify user before the message.
-        // Currently whenever using different browsers, it displays every message coming from the username entered in that broswer.
         socket.on('chat message', function(msg){
-          $('#messages').prepend($('<li>').text(user + ':').wrapInner("<strong />"));
           $('#messages').prepend($('<li>').html(msg));
         });
       });
