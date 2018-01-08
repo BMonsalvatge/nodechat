@@ -30,7 +30,7 @@
           return false;
         });
         socket.on('chat message', function(msg){
-          $('#messages').prepend($('<li>').html(msg));
+          $('#messages').prepend($('<li>').text(msg));
         });
       });
     </script>
