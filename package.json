@@ -1,10 +1,11 @@
 {
   "name": "nodechat",
   "version": "1.0.0",
-  "description": "A basically Node Chat app",
+  "description": "A basic Node Chat app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
