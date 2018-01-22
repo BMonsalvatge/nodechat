@@ -8,33 +8,36 @@ app.set('view engine','ejs');
 // use res.render to load up an ejs view file
 
 // index page 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.render('pages/index');
 });
 
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
+  // Sends message when someone joins the page
+  io.emit('system message', `A User Join the Chat`);
 
-  var name = socket.id;
+  var name = "Temp User " + socket.id;
 
-  socket.on('temp login', function(tempname){
-    name = tempname;
+  console.log(socket.id);
+
+  // When a username is picked
+  socket.on('nickname pick', (nickname) => {
+    io.emit('system message', `${name} changed their nickname to ${nickname}`);
+    name = nickname;
+    return name;
   });
 
-  console.log(name, socket.id);
-/*
-  if (!name) {
-    name = clients.length;
-    clients.push(socket.id);
-  }
-  
-  console.log(clients);
-*/
+  // When a normal chat message is sent
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', `${name}: ${msg}`);
+  });
 
-  socket.on('chat message', function(msg){
-    io.emit('chat message', `<strong>User ${name}:</strong> ${msg}`);
+  // Used for system messages that will face the client
+  socket.on('system message', (msg) => {
+    io.emit('system message', `${msg}`);
   });
 });
 
-http.listen(3000, function(){
+http.listen(3000, () => {
   console.log('listening on *:3000');
 });
