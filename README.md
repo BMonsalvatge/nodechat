@@ -8,4 +8,4 @@ then
 
 then browse the localhost:3000 in your web browser.
 
-Demo here: https://nodechat-cydgznzqyr.now.sh/
+Demo here: https://nodechat-zxigsesaow.now.sh/
