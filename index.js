@@ -24,20 +24,20 @@ app.get('*', (req, res) => {
     console.log(socket.id);
   
     // When a username is picked
-    socket.on('nickname pick', (nickname) => {
-      io.emit('system message', `${name} changed their nickname to ${nickname}`);
+    socket.on(url + ' nickname pick', (nickname) => {
+      io.emit(url + ' system message', `${name} changed their nickname to ${nickname}`);
       name = nickname;
       return name;
     });
   
     // When a normal chat message is sent
-    socket.on('chat message', (msg) => {
-      io.emit('chat message', `${name}: ${msg}`);
+    socket.on(url + ' chat message', (msg) => {
+      io.emit(url + ' chat message', `${name}: ${msg}`);
     });
   
     // Used for system messages that will face the client
-    socket.on('system message', (msg) => {
-      io.emit('system message', `${msg}`);
+    socket.on(url + ' system message', (msg) => {
+      io.emit(url + ' system message', `${msg}`);
     });
   });
 });

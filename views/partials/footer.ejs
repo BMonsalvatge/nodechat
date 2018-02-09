@@ -8,23 +8,24 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   $( () => {
+    const url = window.location.pathname;
     const socket = io();
     // Handles the message submitting
     $('#form-msg').submit(() => {
-        socket.emit('chat message', $('#m').val());
+        socket.emit(url + ' chat message', $('#m').val());
         $('#m').val('');
         return false;
     });
 
     // Handles username being selected
     $('#name-pick').submit(() => {
-        socket.emit('nickname pick', $('#nickname').val());
+        socket.emit(url + ' nickname pick', $('#nickname').val());
         $('#nickname').val('');
         return false;
     });
 
     // Adds message to screen
-    socket.on('chat message', (msg) => {
+    socket.on(url + ' chat message', (msg) => {
         // Add newest message to bottom of list
         $('#messages').append($('<li>').text(msg));
         
@@ -32,7 +33,7 @@
         $(document).scrollTop($(document).height());
     });
     // Posts system messages to the screen
-    socket.on('system message', (msg) => {
+    socket.on(url + ' system message', (msg) => {
         $('#messages').append($('<li class="font-italic">').html(msg));
         $(document).scrollTop($(document).height());
     });
